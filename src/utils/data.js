@@ -6,7 +6,7 @@ const events = [
       date: "2025-06-15",
       location: "New York City",
       price: 75,
-      thumbnail: "/images/rock_concert.jpg"
+      thumbnail: "/assets/images/rockshow.jpg"
     },
     {
       id: 2,
@@ -15,7 +15,7 @@ const events = [
       date: "2025-07-02",
       location: "San Francisco",
       price: 40,
-      thumbnail: "/images/art_exhibition.jpg"
+      thumbnail: "/assets/images/artshow.jpg"
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ const events = [
       date: "2025-08-20",
       location: "Chicago",
       price: 30,
-      thumbnail: "/images/food_festival.jpg"
+      thumbnail: "/assets/images/foodfest.jpg"
     },
     {
       id: 4,
@@ -33,7 +33,7 @@ const events = [
       date: "2025-09-10",
       location: "Boston",
       price: 20,
-      thumbnail: "/images/marathon.jpg"
+      thumbnail: "/assets/images/marathon.jpg"
     },
     {
       id: 5,
@@ -42,7 +42,7 @@ const events = [
       date: "2025-10-05",
       location: "Seattle",
       price: 120,
-      thumbnail: "/images/tech_conference.jpg"
+      thumbnail: "/assets/images/techcon.jpg"
     },
     {
       id: 6,
@@ -51,7 +51,7 @@ const events = [
       date: "2025-11-18",
       location: "New Orleans",
       price: 55,
-      thumbnail: "/images/jazz_night.jpg"
+      thumbnail: "/assets/images/jazznight.jpg"
     }
   ];
    

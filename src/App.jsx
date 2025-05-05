@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import EventDetails from './pages/EventDetails';
 import Cart from './pages/Cart';
@@ -8,16 +8,16 @@ import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { useAuth } from './hooks/useAuth';
+import { CartProvider } from './contexts/CartContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './contexts/AuthContext';
 
-function PrivateRoute({ children }) {
-    const { user } = useAuth();
 
-    return user ? children : <Navigate to="/login" />;
-}
 
 function App() {
     return (
+        <AuthProvider>
+        <CartProvider>
         <Router>
             <div className="flex flex-col min-h-screen">
                 <Navbar />
@@ -33,9 +33,9 @@ function App() {
                         <Route
                             path="/profile"
                             element={
-                                <PrivateRoute>
+                                <ProtectedRoute>
                                     <Profile />
-                                </PrivateRoute>
+                                </ProtectedRoute>
                             }
                         />
                     </Routes>
@@ -43,6 +43,8 @@ function App() {
                 <Footer />
                 </div>
         </Router>
+        </CartProvider>
+        </AuthProvider>
     );
 }
 
