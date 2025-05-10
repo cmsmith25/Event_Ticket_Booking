@@ -31,25 +31,25 @@ function CartPage() {
                 <div key={item.id} className="flex items-center gap-3 border-b py-4">
                     
                     {/*Shows the event photo */}
-                    <img src={item.thumbnail}  alt={item.title} className="w-24 h-24 object-cover rounded"/>
+                    <img src={item.thumbnail}  alt={item.title} className="w-24 h-24  rounded"/>
 
                     {/*details of the event*/}
                     <div className="flex-1">
                         <h2>{item.title}</h2>
                         <p>{item.date} - {item.location}</p>
-                        <p>${item.price} per ticket</p>
+                        <p className="text-blue-800 font-bold">${item.price} per ticket</p>
 
 
                         {/*Input for the ticket quantity*/}
                         <div className="mt-2">
-                            <label className="text-gray-700 text-sm mr-2">Quantity:</label>
+                            <label className="text-gray-700 text-sm">Quantity:</label>
 
                             <input
                                 type="number"
                                 min="1"
                                 value={item.quantity}
                                 onChange={e => updateQuantity(item.id, parseInt(e.target.value))}
-                                className="w-20 p-1 border rounded"/>
+                                className="w-18 p-1 border rounded"/>
                         </div>
                     </div>
 
@@ -62,11 +62,18 @@ function CartPage() {
 
             {/*Summary of cart items*/}
             <div className="text-right mt-6">
-                <p className="text-xl font-semibold">Total: ${totalPrice.toFixed(2)}</p>
+                <p className="text-xl ">Total: ${totalPrice.toFixed(2)}</p>
+
+                <div className="flex justify-end  gap-4 mt-4">
                 <button onClick={clearCart} className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Clear Cart</button>
+                <Link to ="/checkout" className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Go to Checkout</Link>
             </div>
         </div>
+        </div>
     );
+    
 }
 
 export default CartPage;
+
+//done

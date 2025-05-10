@@ -8,6 +8,7 @@ function CartItem({ item }) {
     //Pull in the update and remove functions from CartContext
     const {updateQuantity, removeFromCart} = useCart();
 
+
     //This will run when the user changes the quantity
     const handleQuantityChange = (e) => {
         const newQty = parseInt(e.target.value); //converts the string into number
@@ -18,7 +19,7 @@ function CartItem({ item }) {
 
 
     return (
-        <div className="flex-gap-4 items-center border-b py-4">
+        <div className="flex-gap-3 items-center border-b py-4">
             {/*Shows the product photo*/}
             <img
                 src={item.thumbnail}
@@ -27,7 +28,7 @@ function CartItem({ item }) {
 
             {/*Event info section*/}
             <div className="flex-1">
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <h3 className="text-lg font-bold">{item.title}</h3>
                 <p className="text-gray-600">${item.price} each</p>
 
                 {/*Quantity input*/}
@@ -58,3 +59,5 @@ function CartItem({ item }) {
 }
 
 export default CartItem;
+
+//done

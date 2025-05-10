@@ -2,16 +2,20 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCYQsO8pPcfW2UuTDEYNF4QC0bUK7A9DzM",
-  authDomain: "event-ticket-booking-b0e55.firebaseapp.com",
-  projectId: "event-ticket-booking-b0e55",
-  storageBucket: "event-ticket-booking-b0e55.firebasestorage.app",
-  messagingSenderId: "248311318204",
-  appId: "1:248311318204:web:2e70057f7e3491acceb2b9"
-    
-};
 
+//config sensored so Git does not recieve environment variables
+const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
+  };
+  
+  //console.log("API KEY:", process.env.REACT_APP_FIREBASE_API_KEY);
+  
+  // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);

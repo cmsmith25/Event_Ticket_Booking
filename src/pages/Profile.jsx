@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { useAuth } from '../hooks/useAuth';
+import {doc, getDoc} from 'firebase/firestore';
+import {db} from '../utils/firebase';
+import { useAuth } from '../contexts/AuthContext';
 import {Navigate} from 'react-router-dom';
 
 
@@ -11,6 +13,7 @@ function ProfilePage() {
     //Holds input values from form
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [bookings, setBookings] = useState([]);
 
 
     //Loads current user's info
@@ -18,6 +21,20 @@ function ProfilePage() {
         if (user) {
             setName(user.displayName || '');
             setEmail(user.email || '');
+
+            const getBookings = async() => {
+                const userRef = doc(db, 'users', user.uid);
+                const userSnap = await getDoc(userRef);
+
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    setBookings(data.bookings || []);
+                } else {
+                    console.log('No user document found');
+                }
+            };
+
+            getBookings();
         }
     }, [user]);
 
@@ -28,20 +45,20 @@ function ProfilePage() {
         e.preventDefault(); //prevents page refresh issue I was having
 
         try{
-            await updateUser(name,email); //updates user info
+            await updateUser(name,email); //updates the user info
             alert('Profile has been updated!');
         } catch (error) {
             console.error('Error updating profile:', error);
         }
     };
 
-    //if user is not logged in, sends back to login page
+    //if user is not logged in, sends them back to login page
     if(!user) {
         return <Navigate to="login" />;
     }
 
     return (
-        <div className="max-w-md mx-auto mt-10 bg-white shadow-md rounded p-6">
+        <div className="max-w-md mx-auto mt-12 bg-white shadow-md rounded p-6">
             <h2 className="text-2xl font-bold text-center mb-6">Edit profile</h2>
 
             {/*Shows profile pic*/}
@@ -82,11 +99,32 @@ function ProfilePage() {
 
                 <button
                     type="submit"
-                    className="w-full bg-green-700 text-white p-2 rounded hover:bg-blue-800">Save Changes</button>
+                    className="w-full bg-green-600 text-white p-2 rounded hover:bg-blue-800">Save Changes</button>
             </form>
+
+            {/*Booking history*/}
+            <div className="mt-10">
+                <h3 className="text-xl text-center font-bold mb-4">Booking History</h3>
+                {bookings.length === 0? (
+                    <p className="text-gray-500">No bookings have been made yet.</p>
+                ) : (
+                    <ul className="space-y-6">
+                        {bookings.map((booking, index) => (
+                            <li key={index} className="p-3 border rounded bg-gray-50">
+                                <p>Event: {booking.eventName}</p>
+                                <p>Date: {booking.date}</p>
+                                <p>Quantity: {booking.quantity}</p>
+                                <p>Total Paid: ${booking.totalPrice}</p>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 
 }
 
 export default ProfilePage;
+
+//done

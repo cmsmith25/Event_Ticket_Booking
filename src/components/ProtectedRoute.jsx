@@ -1,6 +1,6 @@
 import React from "react";
 import {Navigate } from 'react-router-dom';
-import {useAuth} from '../hooks/useAuth';
+import {useAuth} from '../contexts/AuthContext';
 
 
 export default function ProtectedRoute({ children }) {
@@ -11,6 +11,9 @@ export default function ProtectedRoute({ children }) {
         return <Navigate to="/login" />;
     }
 
+    
     //If user is logged in show protected page
     return children;
 }
+
+//done

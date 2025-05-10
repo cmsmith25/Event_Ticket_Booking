@@ -70,9 +70,11 @@ function EventDetails() {
 
             <button
                 onClick={handleAddToCart}
-                className="bg-green-700 hover:bg-blue-800 text-white px-6 py-2 rounded">Add to Cart</button>
+                className="bg-green-500 hover:bg-blue-600 text-white px-6 py-2 rounded">Add to Cart</button>
         </div>
     );
 }
 
 export default EventDetails;
+
+//done
